@@ -25,6 +25,7 @@ const PipelinePage = async ({ params }: Props) => {
   const pipelines = await db.pipeline.findMany({
     where: { subAccountId: params.subaccountId },
   });
+
   const lanes = (await getLanesWithTicketAndTags(
     params.pipelineId
   )) as LaneDetail[];
