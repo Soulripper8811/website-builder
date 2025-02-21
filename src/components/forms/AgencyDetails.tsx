@@ -98,6 +98,7 @@ const AgencyDetails = ({ data }: Props) => {
   const handleSubmit = async (values: z.infer<typeof FormSchema>) => {
     try {
       let newUserData;
+      let custId;
       if (!data?.id) {
         const bodyData = {
           email: values.companyEmail,
@@ -120,14 +121,25 @@ const AgencyDetails = ({ data }: Props) => {
             state: values.zipCode,
           },
         };
+        const customerResponse = await fetch("/api/stripe/create-customer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bodyData),
+        });
+        const customerData: { customerId: string } =
+          await customerResponse.json();
+        custId = customerData.customerId;
       }
 
       newUserData = await initUser({ role: "AGENCY_OWNER" });
       console.log(data);
-      if (!newUserData?.id) return;
+      if (!data?.customerId && !custId) return;
 
-      await upsertAgency({
-        id: newUserData?.id ? newUserData?.id : v4(),
+      const response = await upsertAgency({
+        id: data?.id ? data.id : v4(),
+        customerId: data?.customerId || custId || "",
         address: values.address,
         agencyLogo: values.agencyLogo,
         city: values.city,
@@ -146,6 +158,8 @@ const AgencyDetails = ({ data }: Props) => {
       toast({
         title: "Created Agency",
       });
+      if (data?.id) return router.refresh();
+      if (response) return router.refresh();
     } catch (error) {
       console.log(error);
       toast({
