@@ -7,10 +7,7 @@ body {
   height: 100vh;
 }
 
-[data-rbd-drag-handle-context-id] {
-  touch-action: none;
-  /* Fixes drag not working on touch devices */
-}
+
 
 *,
 *::before,
