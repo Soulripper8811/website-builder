@@ -175,7 +175,7 @@ const SettingsTab = () => {
             <Input
               id="color"
               onChange={handleOnChanges}
-              value={state.editor.selectedElement.styles.color}
+              // value={state.editor.selectedElement.styles.color}
             />
           </div>
           <div className="flex gap-4">
@@ -210,7 +210,7 @@ const SettingsTab = () => {
                 placeholder="px"
                 id="fontSize"
                 onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.fontSize}
+                // value={state.editor.selectedElement.styles.fontSize}
               />
             </div>
           </div>
@@ -432,7 +432,7 @@ const SettingsTab = () => {
                 className="!border-y-0 rounded-none !border-r-0 mr-2"
                 id="backgroundColor"
                 onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.backgroundColor}
+                // value={state.editor.selectedElement.styles.backgroundColor}
               />
             </div>
           </div>
@@ -451,7 +451,7 @@ const SettingsTab = () => {
                 className="!border-y-0 rounded-none !border-r-0 mr-2"
                 id="backgroundImage"
                 onChange={handleOnChanges}
-                value={state.editor.selectedElement.styles.backgroundImage}
+                // value={state.editor.selectedElement.styles.backgroundImage}
               />
             </div>
           </div>
